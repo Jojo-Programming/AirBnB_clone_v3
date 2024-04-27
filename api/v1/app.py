@@ -3,10 +3,10 @@
 """
 
 
-from flask import Flask, jsonify
+from flask import Flask
 from os import getenv
 from api.v1.views import app_views
-from models import storage
+
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
