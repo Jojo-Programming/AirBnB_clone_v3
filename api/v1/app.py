@@ -4,7 +4,6 @@
 
 
 from flask import Flask, jsonify
-from models import storage
 from os import getenv
 from api.v1.views import app_views
 
@@ -14,15 +13,11 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def  close_storage(exception=None):
+def  teardown(self):
     '''close storage connection'''
     storage.close()
 
 if __name__ == "__main__":
-    host = getenv('HBNB_API_HOST')
-    port = getenv('HBNB_API_PORT')
-    if not host:
-        host = '0.0.0.0'
-    if not port:
-        port = '5000'
-    app.run(host=host, port=port, threaded=True)
+    host = getenv('HBNB_API_HOST', '0.0.0.0')
+    port = int(getenv('HBNB_API_PORT', '5000'))
+    app.run(host, port, threaded=True)
