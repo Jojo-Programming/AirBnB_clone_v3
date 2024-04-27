@@ -79,11 +79,10 @@ class DBStorage:
         """A method to retrieve one object"""
         if cls and id:
            obj = cls, __name__ + "." + id
-           return
-    self.all(cls).get(obj)
-           return None
+        self.all(cls).get(obj)
+        return None
 
     def count(self, cls=None):
         """A method to count the number of objects in storage"""
-        def count(self, cls=None):
+    def count(self, cls=None):
         return (len(self.all(cls)))
