@@ -13,7 +13,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def  teardown(self):
+def  teardown_appcontext(exception):
     '''close storage connection'''
     storage.close()
 
