@@ -9,3 +9,13 @@ from flask import jsonify
 def status():
     """display api the status"""
     return jsonify(status="OK")
+
+@app_views.route('/stats', strict_slashes=False)
+def stats():
+    """count number of each objects by type"""
+    classes = {'states': State, 'users': User,
+            'amenities': Amenity, 'cities': City,
+            'places': Place, 'reviews': Review}
+    for key in classes:
+        classes[key] = storage.count(classes[key])
+    return jsonify(classes)
